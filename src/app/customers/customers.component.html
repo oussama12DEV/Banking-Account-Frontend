@@ -1,0 +1,60 @@
+<div class="container mt-2">
+  <ng-container *ngIf="customers | async as lostcustomers ;else eroorouloading">
+    <div class="card mt-md-5" >
+    <div class="card-header">ListCustomers</div>
+    <div class="card-body">
+      <div *ngIf="searchcustomers ">
+      <form [formGroup]="searchcustomers " (ngSubmit)="searchsCustomers()">
+        <div class="input-group">
+          <label class="input-group-text">Keyword :</label>
+          <input type="text" formControlName="keyword" class="form-control">
+          <button type="submit" class="btn btn-info">
+            <i class="bi bi-search">
+
+            </i>
+          </button>
+        </div>
+      </form>
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Id</th><th>Name</th><th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of customers | async">
+          <td>{{c.id}}</td>
+          <td>{{c.nom}}</td>
+          <td>{{c.gmail}}</td>
+
+          <button class="btn btn-danger" >
+            <i  (click)="deletCustomers(c)" class="bi bi-trash">
+
+            </i>
+          </button>
+          <button (click)="Customer_account(c)" class="btn btn-success" >
+           Account
+          </button>
+
+
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+    </div>
+  </ng-container>
+  <ng-template #eroorouloading>
+    <ng-container *ngIf="erromsg">
+      <div class="text-bg-danger">
+        {{erromsg}}
+
+      </div>
+    </ng-container>
+
+
+  </ng-template>
+</div>
+
+
